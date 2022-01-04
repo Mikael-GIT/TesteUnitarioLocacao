@@ -1,14 +1,11 @@
 package br.ce.wcaquino.servicos;
 
 import java.util.Date;
-import java.util.regex.MatchResult;
-
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+
+import org.junit.rules.ExpectedException;
 
 import br.ce.wcaquino.entidades.Filme;
 import br.ce.wcaquino.entidades.Locacao;
@@ -18,6 +15,8 @@ import br.ce.wcaquino.utils.DataUtils;
 
 public class LocacaoServiceTest {
     
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Test
     public void teste() throws Exception{
@@ -42,8 +41,8 @@ public class LocacaoServiceTest {
         //cenário
         LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Mikael");
-        Filme filme = new Filme("A culpa é das estrelas", 2, 40.00);
-        
+        Filme filme = new Filme("A culpa é das estrelas", 0, 40.00);
+
         //ação
         Locacao locacao = locacaoService.alugarFilme(usuario, filme);
     }
@@ -54,10 +53,14 @@ public class LocacaoServiceTest {
         //cenário
         LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Mikael");
-        Filme filme = new Filme("A culpa é das estrelas", 2, 40.00);
+        Filme filme = new Filme("A culpa é das estrelas", 0, 40.00);
+    
+
         //ação
         Locacao locacao = locacaoService.alugarFilme(usuario, filme);
-
+        exception.expect(Exception.class);
+        exception.expectMessage("Filme sem estoque");
         //verificação
+
     }
 }
