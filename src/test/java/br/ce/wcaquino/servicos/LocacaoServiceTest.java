@@ -1,7 +1,10 @@
 package br.ce.wcaquino.servicos;
 
 import java.util.Date;
+
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -15,14 +18,24 @@ import br.ce.wcaquino.utils.DataUtils;
 
 public class LocacaoServiceTest {
     
+    private LocacaoService locacaoService;
+
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
+    @Before
+    public void setup(){
+        locacaoService = new LocacaoService();
+    }
+
+    @After
+    public void tearDown(){
+        System.out.println("After");
+    }
     @Test
     public void teste() throws Exception{
 
         //cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Mikael");
         Filme filme = new Filme("A culpa é das estrelas", 2, 40.00);
         //ação
@@ -39,7 +52,6 @@ public class LocacaoServiceTest {
     public void verificaSeEstaSemOFilmeNoEstoqueFormaElegante() throws Exception{
 
         //cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Mikael");
         Filme filme = new Filme("A culpa é das estrelas", 0, 40.00);
 
@@ -51,7 +63,6 @@ public class LocacaoServiceTest {
     public void verificaSeEstaSemOFilmeNoEstoqueNovaForma() throws Exception{
 
         //cenário
-        LocacaoService locacaoService = new LocacaoService();
         Usuario usuario = new Usuario("Mikael");
         Filme filme = new Filme("A culpa é das estrelas", 0, 40.00);
     
@@ -63,4 +74,5 @@ public class LocacaoServiceTest {
         //verificação
 
     }
+
 }
