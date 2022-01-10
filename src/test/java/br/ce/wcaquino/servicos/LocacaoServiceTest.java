@@ -3,8 +3,10 @@ package br.ce.wcaquino.servicos;
 import java.util.Date;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -19,6 +21,7 @@ import br.ce.wcaquino.utils.DataUtils;
 public class LocacaoServiceTest {
     
     private LocacaoService locacaoService;
+    public static Integer contador = 0;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -26,12 +29,25 @@ public class LocacaoServiceTest {
     @Before
     public void setup(){
         locacaoService = new LocacaoService();
+        contador += 1;
+        System.out.println(contador);
     }
 
     @After
     public void tearDown(){
         System.out.println("After");
     }
+
+    @BeforeClass
+    public static void setupClass(){
+        System.out.println("Before class");
+    }
+
+    @AfterClass
+    public static void tearDownClass(){
+        System.out.println("After class");
+    }
+
     @Test
     public void teste() throws Exception{
 
